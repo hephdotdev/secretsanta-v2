@@ -36,6 +36,7 @@ namespace SecretSanta.Models.Client {
         }
         
         private Task OnChatCommandReceived (object sender, OnChatCommandReceivedArgs e) {
+            Console.WriteLine($"{DateTime.UtcNow.ToString(Configuration.Application.DateFormat)}.DEBUG,CHATCMD,#{e.Command.ChatMessage.Channel},{e.Command.ChatMessage.Username},{e.Command.CommandIdentifier}{e.Command.CommandText}");
             return Task.CompletedTask;
         }
         private Task OnMessageSent (object sender, OnMessageSentArgs e) {

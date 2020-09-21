@@ -5,6 +5,8 @@ namespace SecretSanta.Models {
         [Key]
         public string Id { get; set; }
         [Required]
+        public string Name { get; set; }
+        [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public bool IsEnabled { get; set; } = true;
         [Required]

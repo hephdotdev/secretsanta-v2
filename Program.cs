@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 namespace SecretSanta {
     class Program {
@@ -6,9 +8,15 @@ namespace SecretSanta {
             // Initialize data containers
             Data.Container.ChatClients = new Dictionary<string, Models.Client.TwitchChatClient>();
             
+            // Setup database context
+            var context = new Data.SecretSantaContext();
+            
+            // Fetch login data
+            var user = context.Channels.Where(x => x.Name == "itssecretsanta").Single();
+
             // Build Chat Client
-            // string userid = await Helpers.File.TryReadLineFromFileAsync(System.IO.Path.Join(System.Environment.CurrentDirectory, "SECRETS", "twitch.userid"));
-            // Data.Container.ChatClients.TryAdd(userid, new Models.Client.TwitchChatClient();
+            Data.Container.ChatClients.TryAdd(user.Id, new Models.Client.TwitchChatClient(user.Name, user.Token, user.Name));
+            Data.Container.ChatClients[user.Id].Client.Connect();
             
             // Block the main thread
             await Task.Delay(-1);
