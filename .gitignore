@@ -1,0 +1,9 @@
+.vs
+.vscode
+bin
+build
+obj
+Migrations
+SECRETS
+SNIPPETS
+TODO
